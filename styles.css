@@ -1,4 +1,4 @@
-*::before , *::after {
+* , *::before , *::after {
   box-sizing: border-box;
   font-family: Arial;
 }
@@ -30,4 +30,24 @@ body {
 .cell {
   background-color: #AAA;
   border-radius: 1vmin;
+}
+
+.tile {
+  --x : 1;
+  --y : 2 ;
+  --background-lightness: 20%;
+  --text-lightness:80%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background-color: red;
+  border-radius: 1vmin;
+  top : calc( var(--y) * (var(--cell-size) + var(--cell-gap) ) + var(--cell-gap) ) ; 
+  left : calc( var(--x) * (var(--cell-size) + var(--cell-gap) ) + var(--cell-gap) ) ; 
+  font-weight: bold;
+  background-color: hsl(200, 50%, var(--background-lightness));
+  color: hsl(200, 25%, var(--text-lightness));
 }
