@@ -11,6 +11,10 @@ export default class Tile  {
     this.value = value
   }
 
+  get value(){
+    return this.#value
+  }
+
   set value (v) {
     this.#value = v
     this.#tileElement.textContent = v
@@ -27,5 +31,15 @@ export default class Tile  {
   set y (value) {
     this.#y = value
     this.#tileElement.style.setProperty("--y",value)
+  }
+
+  remove() {
+    this.#tileElement.remove()
+  }
+
+  waitForTransition(animation = false) {
+    return new Promise(resolve => {
+      this.#tileElement.addEventListener(animation ? "animationend" : "transitionend", resolve, { once : true })
+    })
   }
 }
