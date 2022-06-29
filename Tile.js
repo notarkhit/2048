@@ -18,9 +18,10 @@ export default class Tile  {
   set value (v) {
     this.#value = v
     this.#tileElement.textContent = v
-    const power = Math.log2(v)
-    const backgroundLightness = 100 - power * 9
-    this.#tileElement.style.setProperty("--background-lightness",`${backgroundLightness}%`)
+    const backgroundLightness = setLightness(v)
+    const textLightness =  setTextLightness(v)
+    this.#tileElement.style.setProperty("color",textLightness)
+    this.#tileElement.style.setProperty("background-color",backgroundLightness)
   }
 
   set x (value) {
@@ -43,3 +44,46 @@ export default class Tile  {
     })
   }
 }
+
+function setLightness(val) {
+
+  switch (val) {
+   case 2: 
+       return "hsl(32, 31%, 89%)"
+   case 4:
+       return "hsl(39, 42%, 87%)" 
+   case 8:
+       return "hsl(28, 69%, 72%)" 
+   case 16:
+       return "hsl(20, 73%, 68%)" 
+   case 32:
+       return "hsl(11, 72%, 67%)" 
+   case 64:
+       return "hsl(11, 74%, 61%)" 
+   case 128:
+       return "hsl(45, 66%, 76%)" 
+   case 256:
+       return "hsl(46, 67%, 74%)" 
+   case 512:
+       return "hsl(47, 81%, 69%)" 
+   case 1024:
+       return "hsl(46, 71%, 69%)" 
+   case 2048:
+       return "hsl(48, 76%, 58%)" 
+   case 4096:
+       return "hsl(52, 7%, 22%)" 
+   default:
+       return "hsl(0, 0%, 0%)" 
+  }
+ 
+ }
+
+ function setTextLightness(val) {
+    switch(val){
+      case 2: 
+      case 4:
+       return "hsl(32, 7%, 43%)" 
+      case 8:
+       return "hsl(0, 0%, 100%)" 
+    }
+ }
